@@ -1,0 +1,25 @@
+default: run
+
+# build the program to bin directory
+build:
+	@go build -o bin/ecom cmd/main.go
+
+# run all tests with verbose flag
+test:
+	@go test -v ./...
+
+# build and run
+run: build
+	@./bin/ecom
+
+# create a new migration
+migration NAME:
+	@./migrate create -ext sql -dir cmd/migrate/migrations {{NAME}}
+
+# migrate up
+migrate-up:
+	@go run cmd/migrate/main.go up
+
+# migrate down
+migrate-down:
+	@go run cmd/migrate/main.go down
