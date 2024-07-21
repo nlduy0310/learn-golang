@@ -1,17 +1,18 @@
 package ceasar
 
+import "unicode/utf8"
+
 func Encode(text string, rotationFactor int) string {
-	res := ""
+	res := make([]rune, 0, utf8.RuneCountInString(text))
 	for _, r := range text {
 		if !isLetter(r) {
-			res += string(r)
+			res = append(res, r)
 		} else {
-			alternateRune := getEncodedLetter(r, rotationFactor)
-			res += string(alternateRune)
+			res = append(res, getEncodedLetter(r, rotationFactor))
 		}
 	}
 
-	return res
+	return string(res)
 }
 
 func getEncodedLetter(r rune, factor int) rune {
