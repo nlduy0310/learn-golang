@@ -4,9 +4,10 @@ import (
 	"fmt"
 	"os"
 	"strings"
-	"task-cli/db"
 
 	"github.com/spf13/cobra"
+
+	"task-cli/db"
 )
 
 var addCmd = &cobra.Command{
