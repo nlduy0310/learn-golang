@@ -1,0 +1,6 @@
+test: clean
+    cp -r ./sample_org ./sample
+    go run main.go
+
+clean:
+    rm -rf ./sample
