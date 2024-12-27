@@ -1,0 +1,26 @@
+# Constants
+binName := "search"
+
+# Aliases
+alias b := build
+alias c := clean-build
+alias e := execute
+alias bne := build-and-execute
+
+# Recipes
+build:
+    go build -o bin/{{binName}} main.go
+
+execute *PARAMS:
+    @if [ -f bin/{{binName}} ];  \
+        then bin/{{binName}} {{PARAMS}}; \
+    else \
+        echo "Executable not found"; \
+    fi
+
+build-and-execute *PARAMS:
+    just build
+    just execute {{PARAMS}}
+
+clean-build:
+    rm -rf bin/*
